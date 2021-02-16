@@ -24,10 +24,14 @@ public class Server {
             in= new DataInputStream(client.getInputStream());
             out= new DataOutputStream(client.getOutputStream());
             Thread outThread= new Thread(new OutputThread(out,scanner,"Server sent: "));
-            Thread echoThread = new Thread(new InputThread(in));
+            Thread inThread = new Thread(new InputThread(in));
             outThread.start();
-            echoThread.start();
+            inThread.start();
+            outThread.join();
+            inThread.join();
         } catch (IOException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
             e.printStackTrace();
         }
         System.out.println("Server was shutdown");
