@@ -1,6 +1,6 @@
 package com.Lesson6.Server;
 
-import com.Lesson6.IOThreads.EchoThread;
+import com.Lesson6.IOThreads.InputThread;
 import com.Lesson6.IOThreads.OutputThread;
 
 import java.io.*;
@@ -23,8 +23,8 @@ public class Server {
             System.out.println(client+"was connected");
             in= new DataInputStream(client.getInputStream());
             out= new DataOutputStream(client.getOutputStream());
-            Thread outThread= new Thread(new OutputThread(out,scanner,"Server wrote: "));
-            Thread echoThread = new Thread(new EchoThread(in,out,client));
+            Thread outThread= new Thread(new OutputThread(out,scanner,"Server sent: "));
+            Thread echoThread = new Thread(new InputThread(in));
             outThread.start();
             echoThread.start();
         } catch (IOException e) {

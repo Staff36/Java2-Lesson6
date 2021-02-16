@@ -22,7 +22,7 @@ public class Client {
             in = new DataInputStream(socket.getInputStream());
             out = new DataOutputStream(socket.getOutputStream());
             Thread inThread =new Thread(new InputThread(in));
-            Thread outThread= new Thread(new OutputThread(out,scanner,""));
+            Thread outThread= new Thread(new OutputThread(out,scanner,"Client sent: "));
             inThread.start();
             outThread.start();
             inThread.join();
